@@ -1,0 +1,80 @@
+package se.mah.m12k1612.stensaxpse;
+
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.webkit.WebView;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    Player player = new Player();
+    int usrScore = 0, npcScore = 0;
+    Button btnRock, btnPapper, btnScissors, btnNewGame;
+    TextView tvHmn, tvNpc, tvHmnScore, tvNpcScore, tvHmnChoice, tvNpcChoice;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        btnRock = (Button) findViewById(R.id.btnRock);
+        btnPapper = (Button) findViewById(R.id.btnPapper);
+        btnScissors = (Button) findViewById(R.id.btnScissors);
+        btnNewGame = (Button) findViewById(R.id.btnScissors);
+        tvHmn = (TextView) findViewById(R.id.tvHmn);
+        tvNpc = (TextView) findViewById(R.id.tvNpc);
+        tvHmnScore = (TextView) findViewById(R.id.tvHmnScore);
+        tvNpcScore = (TextView) findViewById(R.id.tvNpcScore);
+        tvHmnChoice = (TextView) findViewById(R.id.tvHmnChoice);
+        tvNpcChoice = (TextView) findViewById(R.id.tvNpcChoice);
+
+        btnRock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvHmnChoice.setText(btnRock.getText() + "");
+                startGame(0, player.newChoice());
+            }
+        });
+
+        btnPapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvHmnChoice.setText(btnPapper.getText() + "");
+                startGame(1, player.newChoice());
+            }
+        });
+
+        btnScissors.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tvHmnChoice.setText(btnScissors.getText() + "");
+            }
+        });
+
+
+    }
+
+    protected void startGame(int usr, int npc) {
+        int rock = 0;
+        int scissor = 1;
+        int bag = 2;
+
+        if (usr != npc) {
+            if (usr == rock && npc == scissor) {
+                usrScore++;
+                tvHmnScore.setText(usrScore);
+            } else if (usr == scissor && npc == bag) {
+                usrScore++;
+                tvHmnScore.setText(usrScore);
+            } else if (usr == bag && npc == rock) {
+                usrScore++;
+                tvHmnScore.setText(usrScore);
+            } else {
+                npcScore++;
+                tvNpcScore.setText(npcScore);
+            }
+        }
+    }
+}
